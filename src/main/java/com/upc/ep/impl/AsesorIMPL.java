@@ -6,8 +6,8 @@ import com.upc.ep.repositories.AsesorRepos;
 import com.upc.ep.services.AsesorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AsesorIMPL implements AsesorService {
@@ -27,7 +27,7 @@ public class AsesorIMPL implements AsesorService {
     @Override
     public AsesorDTO actualizarAsesor(Long id, AsesorDTO asesorDTO) {
         Asesor asesor = asesorRepos.findById(id)
-                .orElseThrow(() -> new RuntimeException("Asesor no encontrado con ID: " + id));
+            .orElseThrow(() -> new RuntimeException("Asesor no encontrado con ID: " + id));
 
         asesor.setNombreA(asesorDTO.getNombreA());
         asesor.setDniA(asesorDTO.getDniA());
@@ -50,4 +50,8 @@ public class AsesorIMPL implements AsesorService {
         return dtoActualizado;
     }
 
+    @Override
+    public Optional<Asesor> buscarPorCorreo(String correo) {
+        return asesorRepos.findByCorreoA(correo);
+    }
 }

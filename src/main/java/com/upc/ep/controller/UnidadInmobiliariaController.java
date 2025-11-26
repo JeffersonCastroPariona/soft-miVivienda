@@ -33,7 +33,7 @@ public class UnidadInmobiliariaController {
     private ModelMapper modelMapper;
 
     @PostMapping("/unidad")
-    @PreAuthorize("hasRole('ASESOR')")
+    //@PreAuthorize("hasRole('ASESOR')")
     public UnidadInmobiliariaDTO saveUnidad(@RequestBody UnidadInmobiliariaDTO unidadInmobiliariaDTO) {
         UnidadInmobiliaria unidadInmobiliaria = modelMapper.map(unidadInmobiliariaDTO, UnidadInmobiliaria.class);
         unidadInmobiliaria = unidadInmobiliarioService.saveUnidad(unidadInmobiliaria);
@@ -41,7 +41,7 @@ public class UnidadInmobiliariaController {
     }
 
     @GetMapping("/unidades")
-    @PreAuthorize("hasRole('ASESOR')")
+    //@PreAuthorize("hasRole('ASESOR')")
     public List<UnidadInmobiliariaDTO> listarU() {
         List<UnidadInmobiliaria> unidadInmobiliarias = unidadInmobiliarioService.listarU();
         ModelMapper modelMapper = new ModelMapper();
@@ -51,7 +51,7 @@ public class UnidadInmobiliariaController {
     }
 
     @PutMapping("/UNIDAD/modificar/{id}")
-    @PreAuthorize("hasRole('ASESOR')")
+    //@PreAuthorize("hasRole('ASESOR')")
     public ResponseEntity<UnidadInmobiliariaDTO> actualizarUnidad(@PathVariable Long id, @RequestBody UnidadInmobiliariaDTO unidadInmobiliariaDTO) {
         UnidadInmobiliariaDTO actualizada = unidadInmobiliarioService.actualizarUnidad(id, unidadInmobiliariaDTO);
         return new ResponseEntity<>(actualizada, HttpStatus.OK);

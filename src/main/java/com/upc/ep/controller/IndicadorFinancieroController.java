@@ -23,31 +23,31 @@ public class IndicadorFinancieroController {
     private IndicadorFinancieroService indicadorService;
 
     @PostMapping("/financiero")
-    @PreAuthorize("hasRole('ASESOR')")
+    //@PreAuthorize("hasRole('ASESOR')")
     public IndicadorFinanciero save(@RequestBody IndicadorFinanciero entity) {
         return indicadorService.save(entity);
     }
 
     @GetMapping("/financiero/{id}")
-    @PreAuthorize("hasRole('ASESOR')")
+    //@PreAuthorize("hasRole('ASESOR')")
     public Optional<IndicadorFinanciero> findById(@PathVariable Long id) {
         return indicadorService.findById(id);
     }
 
     @GetMapping("/financieros")
-    @PreAuthorize("hasRole('ASESOR')")
+    //@PreAuthorize("hasRole('ASESOR')")
     public List<IndicadorFinanciero> findAll() {
         return indicadorService.findAll();
     }
 
     @PutMapping("/modificar/financiero/{id}")
-    @PreAuthorize("hasRole('ASESOR')")
+    //@PreAuthorize("hasRole('ASESOR')")
     public IndicadorFinanciero update(@PathVariable Long id, @RequestBody IndicadorFinanciero entity) {
         return indicadorService.update(id, entity);
     }
 
     @DeleteMapping("/eliminar/financiero/{id}")
-    @PreAuthorize("hasRole('ASESOR')")
+    //@PreAuthorize("hasRole('ASESOR')")
     public void delete(@PathVariable Long id) {
         indicadorService.deleteById(id);
     }

@@ -26,26 +26,26 @@ public class PlanPagoController {
     }
 
     @GetMapping("/planes")
-    @PreAuthorize("hasRole('ASESOR')")
+    //@PreAuthorize("hasRole('ASESOR')")
     public List<PlanPago> listar() {
         return planPagoService.listarPlanesPago();
     }
 
     @GetMapping("/plan/{id}")
-    @PreAuthorize("hasRole('ASESOR')")
+    //@PreAuthorize("hasRole('ASESOR')")
     public PlanPago obtener(@PathVariable Long id) {
         return planPagoService.obtenerPlanPagoPorId(id);
     }
 
     @PostMapping("/plan")
-    @PreAuthorize("hasRole('ASESOR')")
+    //@PreAuthorize("hasRole('ASESOR')")
     public PlanPago guardar(@RequestBody PlanPago planPago) {
         return planPagoService.guardarPlanPago(planPago);
     }
 
 
     @DeleteMapping("/eliminar/{id}")
-    @PreAuthorize("hasRole('ASESOR')")
+    //@PreAuthorize("hasRole('ASESOR')")
     public void eliminar(@PathVariable Long id) {
         planPagoService.eliminarPlanPago(id);
     }

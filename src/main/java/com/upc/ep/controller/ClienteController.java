@@ -34,7 +34,7 @@ public class ClienteController {
     private ModelMapper modelMapper;
 
     @PostMapping("/cliente")
-    @PreAuthorize("hasRole('CLIENTE')")
+    //@PreAuthorize("hasRole('CLIENTE')")
     public ClienteDTO saveCliente(@RequestBody ClienteDTO clienteDTO) {
         Cliente cliente = modelMapper.map(clienteDTO, Cliente.class);
         cliente = clienteService.saveCliente(cliente);
@@ -42,7 +42,7 @@ public class ClienteController {
     }
 
     @GetMapping("/clientes")
-    @PreAuthorize("hasRole('CLIENTE')")
+    //@PreAuthorize("hasRole('CLIENTE')")
     public List<ClienteDTO> listarC() {
         List<Cliente> clientes = clienteService.listarC();
         ModelMapper modelMapper = new ModelMapper();
@@ -52,7 +52,7 @@ public class ClienteController {
     }
 
     @PutMapping("/cliente/modificar/{id}")
-    @PreAuthorize("hasRole('CLIENTE')")
+    //@PreAuthorize("hasRole('CLIENTE')")
     public ResponseEntity<ClienteDTO> actualizarCliente(@PathVariable Long id, @RequestBody ClienteDTO clienteDTO) {
         ClienteDTO actualizado = clienteService.actualizarCliente(id, clienteDTO);
         return new ResponseEntity<>(actualizado, HttpStatus.OK);

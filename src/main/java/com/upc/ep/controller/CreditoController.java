@@ -26,37 +26,37 @@ public class CreditoController {
     }
 
     @PostMapping("/credito")
-    @PreAuthorize("hasRole('ASESOR')")
+    //@PreAuthorize("hasRole('ASESOR')")
     public Credito save(@RequestBody Credito c){
         return service.save(c);
     }
 
     @GetMapping("/credito/{id}")
-    @PreAuthorize("hasRole('ASESOR')")
+    //@PreAuthorize("hasRole('ASESOR')")
     public Credito find(@PathVariable Long id){
         return service.findById(id).orElse(null);
     }
 
     @GetMapping("/creditos")
-    @PreAuthorize("hasRole('ASESOR')")
+    //@PreAuthorize("hasRole('ASESOR')")
     public List<Credito> all(){
         return service.findAll();
     }
 
     @PutMapping("/modificar/{id}")
-    @PreAuthorize("hasRole('ASESOR')")
+    //@PreAuthorize("hasRole('ASESOR')")
     public Credito update(@PathVariable Long id, @RequestBody Credito c){
         return service.update(id, c);
     }
 
     @DeleteMapping("/credito/eliminar/{id}")
-    @PreAuthorize("hasRole('ASESOR')")
+    //@PreAuthorize("hasRole('ASESOR')")
     public void delete(@PathVariable Long id){
         service.deleteById(id);
     }
 
     @PostMapping("/{id}/plan")
-    @PreAuthorize("hasRole('ASESOR')")
+    //@PreAuthorize("hasRole('ASESOR')")
     public List<PlanPago> generarPlan(
             @PathVariable Long id,
             @RequestParam int graciaTotal,
@@ -68,7 +68,7 @@ public class CreditoController {
     }
 
     @PostMapping("/{id}/indicadores")
-    @PreAuthorize("hasRole('ASESOR')")
+    //@PreAuthorize("hasRole('ASESOR')")
     public IndicadorFinanciero indicadores(
             @PathVariable Long id,
             @RequestBody List<PlanPago> plan

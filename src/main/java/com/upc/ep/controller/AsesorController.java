@@ -16,11 +16,11 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/CrediHome")
 @CrossOrigin(
-        origins = "http://localhost:4200",
-        allowCredentials = "true",
-        exposedHeaders = "Authorization",
-        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE},
-        allowedHeaders = "*"
+    origins = "http://localhost:4200",
+    allowCredentials = "true",
+    exposedHeaders = "Authorization",
+    methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE},
+    allowedHeaders = "*"
 )
 public class AsesorController {
     @Autowired
@@ -30,7 +30,6 @@ public class AsesorController {
     private ModelMapper modelMapper;
 
     @PostMapping("/asesor")
-    @PreAuthorize("hasRole('ASESOR')")
     public AsesorDTO saveAsesor(@RequestBody AsesorDTO asesorDTO) {
         Asesor asesor = modelMapper.map(asesorDTO, Asesor.class);
         asesor = asesorService.saveAsesor(asesor);
@@ -38,19 +37,24 @@ public class AsesorController {
     }
 
     @GetMapping("/asesores")
-    @PreAuthorize("hasRole('ASESOR')")
     public List<AsesorDTO> listarA() {
         List<Asesor> asesores = asesorService.listarA();
-        ModelMapper modelMapper = new ModelMapper();
         return asesores.stream()
-                .map(asesor -> modelMapper.map(asesor, AsesorDTO.class))
-                .collect(Collectors.toList());
+            .map(asesor -> modelMapper.map(asesor, AsesorDTO.class))
+            .collect(Collectors.toList());
     }
 
     @PutMapping("/asesor/modificar/{id}")
-    @PreAuthorize("hasRole('ASESOR')")
     public ResponseEntity<AsesorDTO> actualizarAsesor(@PathVariable Long id, @RequestBody AsesorDTO asesorDTO) {
         AsesorDTO actualizado = asesorService.actualizarAsesor(id, asesorDTO);
         return new ResponseEntity<>(actualizado, HttpStatus.OK);
+    }
+
+    @GetMapping("/asesor/email/{email}")
+    //@PreAuthorize("hasRole('ASESOR')")
+    public ResponseEntity<AsesorDTO> getAsesorByEmail(@PathVariable String email) {
+        return asesorService.buscarPorCorreo(email)
+            .map(asesor -> ResponseEntity.ok(modelMapper.map(asesor, AsesorDTO.class)))
+            .orElse(ResponseEntity.notFound().build());
     }
 }
